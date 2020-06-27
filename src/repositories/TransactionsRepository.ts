@@ -19,16 +19,16 @@ class TransactionsRepository {
     this.transactions = [];
   }
 
-  // public all(): Transaction[] {
-  //   // TODO
-  // }
+  public all(): Transaction[] {
+    return this.transactions;
+  }
 
   // public getBalance(): Balance {
   //   // TODO
   // }
 
   public create({ title, value, type }: CreateTransactionDTO): Transaction {
-    if (type != 'income' && type != 'outcome') {
+    if (type !== 'income' && type !== 'outcome') {
       throw new Error('title must be "income" or "outcome"');
     }
 
@@ -41,6 +41,8 @@ class TransactionsRepository {
       type,
       value,
     });
+
+    this.transactions.push(transaction);
 
     return transaction;
   }
