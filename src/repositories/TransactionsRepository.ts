@@ -9,7 +9,7 @@ interface Balance {
 interface CreateTransactionDTO {
   title: string;
   value: number;
-  type: string;
+  type: 'income' | 'outcome';
 }
 
 interface TransactionsWithBalance {
@@ -57,14 +57,6 @@ class TransactionsRepository {
   }
 
   public create({ title, value, type }: CreateTransactionDTO): Transaction {
-    if (type !== 'income' && type !== 'outcome') {
-      throw new Error('title must be "income" or "outcome"');
-    }
-
-    if (value <= 0) {
-      throw new Error('value must be greater than 0');
-    }
-
     const transaction = new Transaction({
       title,
       type,
